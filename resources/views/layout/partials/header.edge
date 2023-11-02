@@ -1,0 +1,15 @@
+<header class="flex flex-row justify-center m-1">
+  <div class="flex flex-row justify-between max-w-7xl w-full m-2 items-center">
+    <div class="flex flex-row font-semibold text-2xl tracking-wide text-primary-900">
+      <a href="{{ route('home.show') }}">Rural Knowledge</a>
+    </div>
+    <nav class="flex flex-row gap-2">
+      @form.button({ href: route('posts.create') })
+        Escreva
+      @end
+      @form.button({ href: route('posts.index') })
+        Comece aqui
+      @end
+    </nav>
+  </div>
+</header>
