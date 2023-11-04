@@ -13,6 +13,9 @@ export default class Post extends BaseModel {
   public movie: string
 
   @column()
+  public genre: string
+
+  @column()
   public rate: number
 
   @column()

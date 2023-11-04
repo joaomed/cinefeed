@@ -17,10 +17,10 @@ export default class User extends BaseModel {
   public name: string
 
   @column()
-  public lastname: string
+  public lastName: string
 
   @column()
-  public countryId: string
+  public countryId: number
 
   @belongsTo(() => Country)
   public country: BelongsTo<typeof Country>
