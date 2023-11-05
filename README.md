@@ -11,3 +11,5 @@ Editar profile
 Criar Post
 Listar Post
 Detalhar Post
+
+browser-sync start --proxy "127.0.0.1:3333" --files "resources/views/**/*"
