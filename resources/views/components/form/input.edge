@@ -1,5 +1,5 @@
 <input
-  class="rounded-md border shadow-md
+  class="h-6 bg-orange-100 rounded p-2
   @if(flashMessages.has(`errors.${name}`))~
     border-red-500
   @end~
@@ -7,6 +7,7 @@
   type="{{ type }}"
   name="{{ name }}"
   value="{{ flashMessages.get(name) ? flashMessages.get(name) : '' }}"
+  placeholder="{{placeholder}}"
 />
 @if(flashMessages.has(`errors.${name}`))
   <p class="text-sm text-primary-500">

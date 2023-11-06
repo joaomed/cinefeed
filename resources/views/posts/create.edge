@@ -1,23 +1,87 @@
 @layout('layouts/main')
 
 @section('content')
+<div class="flex flex-col m-auto items-center w-90 text-orange-800 p-10 rounded bg-orange-200">
+  @!form.title({ title: 'Crie o seu Post'})
+
+
   <form action="{{ route('posts.store') }}" method="POST">
 
-    <div>
-      @!form.legend({ name: 'Título'})
-      @!form.input({ name: 'title', type: 'text' })
+    <div class="flex flex-col mb-1 text-sm justify-between" >
+      @!form.label({ name: 'Título'})
+      @!form.input({ name: 'title', type: 'text', placeholder: 'Informe o título' })
+    </div>
+    <div class="flex text-sm justify-between gap-4" >
+      <div class="flex flex-col mb-2 text-sm justify-between">
+        @!form.label({ name: 'Filme/ Série'})
+        @!form.input({ name: 'movie', type: 'text', placeholder: 'Informe o filme'  })
+      </div>
+      <div class="flex flex-col mb-2 text-sm justify-between">
+        @!form.label({ name: 'Gênero'})
+        <select  name="genre" id="id-country" required>
+          <option  value="">Selecione o gênero</option>
+          <option value="Ação">Ação</option>
+          <option value="Comédia">Comédia</option>
+          <option value="Drama">Drama</option>
+          <option value="Romance">Romance</option>
+          <option value="Documentário">Documentário</option>
+          <option value="Suspense">Suspense</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Não Listado">Não Listado</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="flex flex-col mb-2 text-sm justify-between" >
+      @!form.label({ name: 'Avaliação'})
+      <div>
+        <div class="flex gap-1 items-center  text-xs">
+         <input type="radio" id="huey" name="rate" value="1" checked />
+          <span class="text-xs">
+          ★
+          </span>
+        </div>
+        <div class="flex gap-1 items-center  text-xs">
+         <input type="radio" id="huey" name="rate" value="1" checked />
+          <span class="text-xs">
+          ★★
+          </span>
+        </div>
+        <div class="flex gap-1 items-center  text-xs">
+         <input type="radio" id="huey" name="rate" value="1" checked />
+          <span class="text-xs">
+          ★★★
+          </span>
+        </div>
+        <div class="flex gap-1 items-center  text-xs">
+         <input type="radio" id="huey" name="rate" value="1" checked />
+          <span class="text-xs">
+          ★★★★
+          </span>
+        </div>
+        <div class="flex gap-1 items-center">
+         <input type="radio" id="huey" name="rate" value="1" checked />
+          <span class="text-xs">
+          ★★★★★
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col mb-8 text-sm justify-between" >
+      @!form.label({ name: 'Crítica'})
+      <textarea class name="content" rows="5" cols="33">
+ Minha crítica sobre esse filme começa com...
+      </textarea>
+
     </div>
 
     <div>
-      @!form.legend({ name: 'Conteúdo'})
-      @!form.input({ name: 'content', type: 'text' })
-    </div>
-
-    <div>
-      @form.button()
-        Salvar
-      @end
+     <button href="{{ route('posts.create') }}" type="submit" class=" w-full border transition p-2 rounded-md bg-orange-800 border-orange-700 text-orange-200 hover:bg-orange-900 active:bg-orange-950">
+        Criar Post
+      </button>
     </div>
   </form>
+</div>
 
 @end

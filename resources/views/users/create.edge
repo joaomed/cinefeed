@@ -1,24 +1,47 @@
 @layout('layouts/main')
 
 @section('content')
-  <p>
-    Crie o seu usuário
-  </p>
+<div class="flex flex-col m-auto items-center w-90 text-orange-800 p-10 rounded bg-orange-200">
+    @!form.title({ title: 'Crie o seu usuário'})
+
   <form action="/users" method="POST">
-    <div>
-      <label>
-        Email:
-      </label>
-      <input type="email" name="email" placeholder="Email" />
+
+    <div class="flex gap-2">
+      <div class="flex flex-col mb-4 text-sm justify-between" >
+        @!form.label({ name: 'Nome'})
+        @!form.input({ name: 'name', type: 'text', placeholder: 'Digite seu Nome' })
+      </div>
+
+      <div class="flex flex-col mb-4 text-sm justify-between" >
+        @!form.label({ name: 'Sobrenome'})
+        @!form.input({ name: 'lastName', type: 'text', placeholder: 'Digite seu Sobrenome' })
+      </div>
     </div>
-    <div>
-      <label>
-        Senha:
-      </label>
-      <input type="password" name="password" placeholder="Senha" />
+
+    <div class="flex flex-col mb-1 text-sm justify-between" >
+      @!form.label({ name: 'Email'})
+      @!form.input({ name: 'email', type: 'email', placeholder: 'Digite seu Email' })
     </div>
-    <button type="submit">
-      Criar
+
+    <div class="flex flex-col mb-4 text-sm justify-between" >
+      @!form.label({ name: 'Senha'})
+      @!form.input({ name: 'password', type: 'password', placeholder: 'Digite sua senha' })
+    </div>
+
+    <div class="flex flex-col mb-8 text-sm justify-between" >
+      @!form.label({ name: 'Qual seu país?'})
+      <select  name="countryId" required>
+        <option  value="">Selecione seu país</option>
+          @each(country in countries)
+        <option value={{country.id}}>{{ country.nome_pais}}</option>
+        @end
+      </select>
+    </div>
+
+    <button href="{{ route('users.create') }}" type="submit" class=" w-full border transition p-2 rounded-md bg-orange-800 border-orange-700 text-orange-200 hover:bg-orange-900 active:bg-orange-950">
+     Criar Usuário
     </button>
   </form>
+</div>
+
 @end

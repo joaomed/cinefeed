@@ -1,4 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Country from 'App/Models/Country'
 import User from 'App/Models/User'
 import UserService from 'App/Services/UserService'
 
@@ -53,7 +54,12 @@ export default class UsersController {
   }
 
   public async create({ view }: HttpContextContract) {
-    return view.render('users/create')
+    const countries = await Country.all()
+    return view.render('users/create', { countries: countries })
+  }
+
+  public async login({ view }: HttpContextContract) {
+    return view.render('users/login')
   }
 
   public async show({ params, view }: HttpContextContract) {

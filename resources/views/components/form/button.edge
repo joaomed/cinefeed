@@ -1,9 +1,9 @@
 @if(href)
-  <a href="{{ href }}" class="border p-2 rounded-md border-primary-700 text-primary-700 hover:bg-primary-50 active:bg-primary-100">
+  <a href="{{ href }}" class=" transition border p-2 rounded-md border-orange-700 text-orange-300 hover:bg-orange-800 active:bg-orange-700">
     {{{ await $slots.main() }}}
   </a>
 @else
-  <button type="submit" class="border p-2 rounded-md border-primary-700 text-primary-700 hover:bg-primary-50 active:bg-primary-100">
+  <button type="submit" class="border p-2 rounded-md  border-orange-700 text-orange-300 hover:bg-orange-800 active:bg-orange-700">
     {{{ await $slots.main() }}}
   </button>
 @end

@@ -4,16 +4,23 @@
 
   <div class="flex w-full max-w-7xl mx-auto">
     <div class="flex flex-col gap-6 mt-10">
-      <div class="text-7xl font-semibold text-primary-900 f">
-        Cinefessed
+      <div class="text-7xl font-semibold text-orange-200 font-teste">
+       Sua sessão já vai começar
       </div>
-      <p class="text-sm text-primary-700">
+      <p class="text-base text-primary-700">
         Conecte-se com amantes de cinema e compartilhe suas críticas e paixão pela sétima arte em nossa rede social dedicada ao mundo cinematográfico!
       </p>
-      <div>
-        @form.button({ href: '/' })
-          Comece
-        @end
+      <div class="flex gap-2">
+
+      @form.button({ href: route('posts.create') })
+        Criar Post
+      @end
+      @form.button({ href: route('posts.index') })
+        Listar Posts
+      @end
+      @form.button({ href: route('users.index') })
+        Listar Usuários
+      @end
       </div>
     </div>
   </div>

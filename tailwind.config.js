@@ -19,6 +19,10 @@ module.exports = {
         },
       },
     },
+    fontFamily: {
+      teste: ['Agbalumo'],
+      roboto: ['Roboto'],
+    },
   },
   plugins: [],
 }
