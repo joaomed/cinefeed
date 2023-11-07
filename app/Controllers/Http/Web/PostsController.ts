@@ -6,7 +6,9 @@ import CreatePostValidator from 'App/Validators/CreatePostValidator'
 
 export default class PostsController {
   public async index({ view }: HttpContextContract) {
-    return view.render('posts/index')
+    const posts = await Post.query().preload('user').exec()
+
+    return view.render('posts/index', { posts: posts })
   }
 
   public async create({ view }: HttpContextContract) {

@@ -1,5 +1,55 @@
 @layout('layouts/main')
 
 @section('content')
-  LISTANDO POSTS
+
+<div class="w-full h-screen bg-orange-300">
+
+ @each(post in posts)
+  <div class="w-full bg-orange-200 m-5 p-5 rounded-lg border-double border-4 border-orange-400">
+    <div class="mb-5">
+      <div class="mb-10">Post {{post.id}}</div>
+
+      <div class="flex gap-3">
+        <span class="flex w-10 bg-orange-900 rounded-full justify-center">{{ post.user.name.substring(0,1) }}
+        </span>
+        <a href="{{ route('users.show', { id: post.user.id }) }}">
+                {{post.user.name}} {{post.user.lastName}}
+        </a>
+      </div>
+    </div>
+
+    <div class="flex items-center">
+      <div class="flex flex-col w-96">
+        <span>{{post.title}}</span>
+        <span>{{post.movie}}</span>
+        <span>{{post.genre}}</span>
+        <span>{{post.content}}</span>
+        <span>{{post.rate}}</span>
+      </div>
+      <img class="border-solid border-2 border-orange-300" src="./assets/alert.png" alt="alert" width="200" height="400">
+    </div>
+
+
+      <tr>
+        <td>
+
+        </td>
+        <td>
+          <span>
+            <a href="{{ route('posts.show', { id: post.id }) }}">
+              show
+            </a>
+          </span>
+          <span>
+            <a href="{{ route('posts.update', { id: post.id }) }}">edit</a>
+          </span>
+          <span>
+            delete
+          </span>
+        </td>
+      </tr>
+  </div>
+
+      @end
+</div>
 @end
