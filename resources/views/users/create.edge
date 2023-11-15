@@ -1,8 +1,8 @@
-@layout('layouts/main')
+@layout('layouts/mainSimple')
 
 @section('content')
 <div class="flex flex-col m-auto items-center w-90 text-orange-800 p-10 rounded bg-orange-200">
-    @!form.title({ title: 'Crie o seu usuário'})
+  @!form.title({ title: 'Crie o seu usuário'})
 
   <form action="/users" method="POST">
 
