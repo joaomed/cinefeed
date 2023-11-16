@@ -4,7 +4,7 @@
 <div class="flex flex-col m-auto items-center w-90 text-orange-800 p-10 rounded bg-orange-200">
     @!form.title({ title: 'Informe suas credenciais'})
 
-  <form action="/users" method="POST">
+  <form action="{{route('sessions.store')}}" method="POST">
     <div class="flex flex-col mb-8 text-sm justify-between" >
       <label for="id-email">
         Email:
@@ -19,7 +19,7 @@
       <input class="h-6 bg-orange-100 rounded p-2" type="password" name="password" id="id-password" placeholder="Digite sua Senha" required />
     </div>
     <div class="flex w-full justify-center">
-      <button href="{{ route('users.create') }}" type="submit" class="w-full border transition p-2 rounded-md bg-orange-800 border-orange-700 text-orange-200 hover:bg-orange-900 active:bg-orange-950">
+      <button type="submit" class="w-full border transition p-2 rounded-md bg-orange-800 border-orange-700 text-orange-200 hover:bg-orange-900 active:bg-orange-950">
       Inciar sessão
       </button>
     </div>

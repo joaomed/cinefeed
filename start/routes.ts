@@ -21,9 +21,13 @@
 import Route from '@ioc:Adonis/Core/Route'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-Route.get('/', async ({ view }: HttpContextContract) => {
+Route.get('/', async ({ auth, view }: HttpContextContract) => {
   return view.render('home/show')
 }).as('home.show')
+
+Route.get('/login', 'SessionsController.login').as('sessions.login')
+Route.post('/login', 'SessionsController.store').as('sessions.store')
+Route.get('/logout', 'SessionsController.logout').as('sessions.logout')
 
 // Route.group(() => {
 //   Route.group(() => {

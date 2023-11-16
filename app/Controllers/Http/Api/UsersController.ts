@@ -59,4 +59,8 @@ export default class UsersController {
 
     return user
   }
+
+  public async login({ view }: HttpContextContract) {
+    return view.render('users/login')
+  }
 }

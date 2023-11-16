@@ -5,15 +5,14 @@
     </div>
     <nav class="flex flex-row gap-2 text-orange-300">
     @if(!auth.isLoggedIn)
-      @form.button({ href: route('users.login') })
+      @form.button({ href: route('sessions.login') })
          Iniciar a sessão
       @end
     @else
-      @form.button({ href: route('users.login') })
+      @form.button({ href: route('sessions.logout') })
          Encerrar a sessão
       @end
     @endif
-
 
       @form.button({ href: route('users.create') })
         Cadastrar

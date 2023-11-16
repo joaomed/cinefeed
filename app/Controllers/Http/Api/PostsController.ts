@@ -5,7 +5,11 @@ import PostService from 'App/Services/PostService'
 import CreatePostValidator from 'App/Validators/CreatePostValidator'
 
 export default class PostsController {
-  public async index({ view }: HttpContextContract) {
+  public async index({ view, auth }: HttpContextContract) {
+    await auth.use('web').authenticate()
+
+    console.log(auth.user!)
+
     const posts = await Post.all()
     posts.forEach(async (element) => {
       await element.load('user')
