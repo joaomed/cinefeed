@@ -4,7 +4,8 @@ import User from 'App/Models/User'
 import UserService from 'App/Services/UserService'
 
 export default class UsersController {
-  public async index({ view }: HttpContextContract) {
+  public async index({ auth, view }: HttpContextContract) {
+    await auth.use('web').authenticate()
     const users = await User.all()
     return view.render('users/index', { users: users })
   }
@@ -53,7 +54,8 @@ export default class UsersController {
     return response.redirect().toRoute('users.show', { id: user.id })
   }
 
-  public async create({ view }: HttpContextContract) {
+  public async create({ auth, view }: HttpContextContract) {
+    await auth.use('web').authenticate()
     const countries = await Country.all()
     return view.render('users/create', { countries: countries })
   }
@@ -62,7 +64,8 @@ export default class UsersController {
     return view.render('users/login')
   }
 
-  public async show({ params, view }: HttpContextContract) {
+  public async show({ auth, params, view }: HttpContextContract) {
+    await auth.use('web').authenticate()
     const user = await User.findOrFail(params.id)
 
     return view.render('users/show', { user: user })

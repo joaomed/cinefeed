@@ -14,7 +14,8 @@ export default class PostsController {
     return view.render('posts/index', { posts: posts })
   }
 
-  public async create({ view }: HttpContextContract) {
+  public async create({ auth, view }: HttpContextContract) {
+    await auth.use('web').authenticate()
     return view.render('posts/create')
   }
 
@@ -30,7 +31,9 @@ export default class PostsController {
     return response.redirect().toRoute('posts.show', { id: post.id })
   }
 
-  public async show({ params, view }: HttpContextContract) {
+  public async show({ auth, params, view }: HttpContextContract) {
+    await auth.use('web').authenticate()
+
     const post = await Post.findOrFail(params.id)
 
     await post.load('user')

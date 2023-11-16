@@ -1,0 +1,19 @@
+<html>
+
+<head>
+  <title >Cinefeed</title>
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/app.css') }}">
+</head>
+
+<body class="flex flex-col font-roboto bg-black text-orange-400 h-screen justify-between">
+  @include('layouts/partials/headerUser')
+
+  <div class="flex flex-col w-full">
+    @!section('content')
+  </div>
+
+  {{--  @include('layouts/partials/footer')  --}}
+
+</body>
+
+</html>

@@ -6,9 +6,8 @@
 </head>
 
 <body class="flex flex-col font-roboto bg-orange-950 text-orange-400 h-screen justify-between">
+  @include('layouts/partials/headerSimple')
   <div class="flex flex-col w-full h-full">
-    <a href="{{route('home.show')}}"> Cinefeed</a>
-
     @!section('content')
   </div>
 </body>
