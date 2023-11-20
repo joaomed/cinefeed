@@ -28,7 +28,7 @@ export default class CreatePostValidator extends BaseValidator {
    */
   public schema = schema.create({
     title: schema.string([rules.minLength(5), rules.maxLength(200), rules.trim()]),
-    content: schema.string([rules.minLength(5), rules.maxLength(200), rules.trim()]),
+    content: schema.string([rules.minLength(5), rules.trim()]),
     movie: schema.string([rules.maxLength(200), rules.trim()]),
     genre: schema.string([rules.minLength(5), rules.maxLength(200), rules.trim()]),
     rate: schema.number(),
