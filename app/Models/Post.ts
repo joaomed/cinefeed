@@ -51,7 +51,7 @@ export default class Post extends BaseModel {
     await post.load('likedUsers')
 
     for await (const likedUser of post.likedUsers) {
-      if (user.id === likedUser.id) {
+      if (user?.id === likedUser.id) {
         return true
       }
     }
