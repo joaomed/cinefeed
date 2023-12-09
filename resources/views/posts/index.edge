@@ -2,6 +2,27 @@
 
 @section('content')
 
+<script>
+
+ window.document.onload = function(e) {
+  }
+
+  async function likebutton(url, postId) {
+    const button = document.getElementById(`like-${postId}`)
+    const response = await fetch(url)
+
+    const data = await response.json()
+
+    if (data.liked) {
+      button.classList.add('text-white');
+      button.classList.remove('text-red-400');
+    } else {
+      button.classList.remove('text-white');
+      button.classList.add('text-red-400');
+    }
+  }
+</script>
+
 <div class="w-full h-full bg-orange-300">
 
  @each(post in posts)
@@ -77,6 +98,12 @@
       <a href="{{ route('posts.delete', { id: post.id }) }}">
         @!icons.delete()
       </a>
+
+      <button id="like-{{post.id}}" class="w-4 h-4 {{ await post.liked(user) ? 'text-white' : 'text-red-400' }}"
+    onclick="likebutton('{{ route('posts.like', { id: post.id })}}', {{post.id}})">
+    teste
+      @!icons.like()
+      </button>
 
     </div>
   </div>

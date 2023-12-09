@@ -7,10 +7,12 @@ import CreatePostValidator from 'App/Validators/CreatePostValidator'
 export default class PostsController {
   // Listar todos os Posts
   public async index({ view, auth }: HttpContextContract) {
+    const user = await User.findOrFail(1)
+
     console.log(auth.user!)
     const posts = await Post.query().preload('user').exec()
 
-    return view.render('posts/index', { posts: posts })
+    return view.render('posts/index', { posts: posts, user: user })
   }
 
   // Página de criar Post
