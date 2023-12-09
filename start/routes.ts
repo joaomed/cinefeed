@@ -51,26 +51,37 @@ Route.get('/logout', 'SessionsController.logout').as('sessions.logout')
 
 Route.group(() => {
   Route.group(() => {
-    Route.get('/', 'UsersController.index').as('index')
-    Route.get('/new', 'UsersController.create').as('create')
-    Route.get('/login', 'UsersController.login').as('login')
-    Route.get('/:id/update', 'UsersController.update').as('update')
-    Route.post('/', 'UsersController.store').as('store')
-    Route.patch('/:id', 'UsersController.patch').as('patch')
-    Route.get('/:id', 'UsersController.show').as('show')
+    Route.group
+    Route.get('/', 'UsersController.index').as('index') // listar todos usuários
+    Route.get('/new', 'UsersController.create').as('create') // listar página de cadastro de usuário
+    Route.get('/login', 'UsersController.login').as('login') // listar página de login de usuário
+    Route.get('/:id/update', 'UsersController.update').as('update') // listar página de editar usuário
+    Route.post('/', 'UsersController.store').as('store') // cadastrar usuário
+    Route.patch('/:id', 'UsersController.patch').as('patch') // editar usuário
+    Route.get('/:id', 'UsersController.show').as('show') // detalhar usuário
   })
     .prefix('/users')
     .as('users')
 
   Route.group(() => {
-    Route.get('/', 'PostsController.index').as('index')
-    Route.get('/new', 'PostsController.create').as('create')
-    Route.post('/', 'PostsController.store').as('store')
-    Route.get('/:id/update', 'PostsController.update').as('update')
-    Route.patch('/:id', 'PostsController.patch').as('patch')
-    Route.get('/:id', 'PostsController.show').as('show')
-    Route.delete('/:id', 'PostsController.delete').as('delete')
+    Route.group(() => {
+      Route.get('/like/:id', 'PostsController.like').as('like') // listar posts curtidos
+
+      Route.get('/new', 'PostsController.create').as('create') // listar página de criar post
+
+      Route.post('/', 'PostsController.store').as('store') // criar post
+
+      Route.patch('/:id', 'PostsController.patch').as('patch') // editar post
+
+      Route.delete('/:id', 'PostsController.delete').as('delete') // deletar post
+    }).middleware('auth')
+
+    Route.get('/', 'PostsController.index').as('index') // listar todos posts
+    Route.get('/:id/update', 'PostsController.update').as('update') // listar página de editar post
+    Route.get('/:id', 'PostsController.show').as('show') // detalhar post
   })
     .prefix('/posts')
     .as('posts')
+
+  Route.get('/file/:id', 'FilesController.show').as('files.show')
 }).namespace('App/Controllers/Http/Web')
