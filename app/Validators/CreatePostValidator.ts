@@ -32,6 +32,10 @@ export default class CreatePostValidator extends BaseValidator {
     movie: schema.string([rules.maxLength(200), rules.trim()]),
     genre: schema.string([rules.minLength(5), rules.maxLength(200), rules.trim()]),
     rate: schema.number(),
+    cover: schema.file({
+      size: '2mb',
+      extnames: ['jpg', 'gif', 'png'],
+    }),
   })
 
   /**

@@ -4,12 +4,21 @@ import User from 'App/Models/User'
 import UserService from 'App/Services/UserService'
 
 export default class UsersController {
+  // Listar todos os usuários
   public async index({ auth, view }: HttpContextContract) {
     await auth.use('web').authenticate()
     const users = await User.all()
     return view.render('users/index', { users: users })
   }
 
+  // Página de criar (cadastrar) um Usuário
+  public async create({ auth, view }: HttpContextContract) {
+    await auth.use('web').authenticate()
+    const countries = await Country.all()
+    return view.render('users/create', { countries: countries })
+  }
+
+  // Salvar (ação de cadastrar) um usuário
   public async store({ request, response }: HttpContextContract) {
     const email = request.input('email', undefined)
     const password = request.input('password', undefined)
@@ -28,12 +37,22 @@ export default class UsersController {
     return response.redirect().toRoute('users.show', { id: user.id })
   }
 
-  public async update({ params, view }: HttpContextContract) {
+  // Detalhar um usuário
+  public async show({ auth, params, view }: HttpContextContract) {
+    await auth.use('web').authenticate()
     const user = await User.findOrFail(params.id)
 
+    return view.render('users/show', { user: user })
+  }
+
+  // Página de atualizar (editar) um usuário
+  public async update({ auth, params, view }: HttpContextContract) {
+    await auth.use('web').authenticate()
+    const user = await User.findOrFail(params.id)
     return view.render('users/update', { user: user })
   }
 
+  // Atualizar (editar) um usuário
   public async patch({ params, request, response }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
 
@@ -54,20 +73,8 @@ export default class UsersController {
     return response.redirect().toRoute('users.show', { id: user.id })
   }
 
-  public async create({ auth, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
-    const countries = await Country.all()
-    return view.render('users/create', { countries: countries })
-  }
-
+  // Página de Login do usuário
   public async login({ view }: HttpContextContract) {
     return view.render('users/login')
-  }
-
-  public async show({ auth, params, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
-    const user = await User.findOrFail(params.id)
-
-    return view.render('users/show', { user: user })
   }
 }
