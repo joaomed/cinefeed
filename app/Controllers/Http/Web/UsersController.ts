@@ -5,15 +5,13 @@ import UserService from 'App/Services/UserService'
 
 export default class UsersController {
   // Listar todos os usuários
-  public async index({ auth, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
+  public async index({ view }: HttpContextContract) {
     const users = await User.all()
     return view.render('users/index', { users: users })
   }
 
   // Página de criar (cadastrar) um Usuário
-  public async create({ auth, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
+  public async create({ view }: HttpContextContract) {
     const countries = await Country.all()
     return view.render('users/create', { countries: countries })
   }
@@ -38,16 +36,14 @@ export default class UsersController {
   }
 
   // Detalhar um usuário
-  public async show({ auth, params, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
+  public async show({ params, view }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
 
     return view.render('users/show', { user: user })
   }
 
   // Página de atualizar (editar) um usuário
-  public async update({ auth, params, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
+  public async update({ params, view }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
     return view.render('users/update', { user: user })
   }

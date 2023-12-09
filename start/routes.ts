@@ -51,13 +51,15 @@ Route.get('/logout', 'SessionsController.logout').as('sessions.logout')
 
 Route.group(() => {
   Route.group(() => {
-    Route.group
-    Route.get('/', 'UsersController.index').as('index') // listar todos usuários
+    Route.group(() => {
+      Route.get('/', 'UsersController.index').as('index') // listar todos usuários
+      Route.patch('/:id', 'UsersController.patch').as('patch') // editar usuário
+      Route.get('/:id/update', 'UsersController.update').as('update') // listar página de editar usuário
+    }).middleware('auth')
+
     Route.get('/new', 'UsersController.create').as('create') // listar página de cadastro de usuário
     Route.get('/login', 'UsersController.login').as('login') // listar página de login de usuário
-    Route.get('/:id/update', 'UsersController.update').as('update') // listar página de editar usuário
     Route.post('/', 'UsersController.store').as('store') // cadastrar usuário
-    Route.patch('/:id', 'UsersController.patch').as('patch') // editar usuário
     Route.get('/:id', 'UsersController.show').as('show') // detalhar usuário
   })
     .prefix('/users')
@@ -65,6 +67,8 @@ Route.group(() => {
 
   Route.group(() => {
     Route.group(() => {
+      Route.get('/', 'PostsController.index').as('index') // listar todos posts
+
       Route.get('/like/:id', 'PostsController.like').as('like') // listar posts curtidos
 
       Route.get('/new', 'PostsController.create').as('create') // listar página de criar post
@@ -76,7 +80,6 @@ Route.group(() => {
       Route.delete('/:id', 'PostsController.delete').as('delete') // deletar post
     }).middleware('auth')
 
-    Route.get('/', 'PostsController.index').as('index') // listar todos posts
     Route.get('/:id/update', 'PostsController.update').as('update') // listar página de editar post
     Route.get('/:id', 'PostsController.show').as('show') // detalhar post
   })

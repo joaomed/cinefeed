@@ -7,8 +7,6 @@ import CreatePostValidator from 'App/Validators/CreatePostValidator'
 export default class PostsController {
   // Listar todos os Posts
   public async index({ view, auth }: HttpContextContract) {
-    await auth.use('web').authenticate()
-
     console.log(auth.user!)
     const posts = await Post.query().preload('user').exec()
 
@@ -16,14 +14,15 @@ export default class PostsController {
   }
 
   // Página de criar Post
-  public async create({ auth, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
+  public async create({ view }: HttpContextContract) {
     return view.render('posts/create')
   }
 
   // Salvar um post
   public async store({ request, response }: HttpContextContract) {
     const payload = await request.validate(CreatePostValidator)
+
+    console.log(payload.cover)
 
     //TODO: Pegar o usuario logado
     const user = await User.findOrFail(1)
@@ -35,8 +34,7 @@ export default class PostsController {
   }
 
   // Detalhar um post
-  public async show({ auth, params, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
+  public async show({ params, view }: HttpContextContract) {
     const post = await Post.findOrFail(params.id)
     await post.load('user')
 
@@ -44,8 +42,7 @@ export default class PostsController {
   }
 
   // Página de atualizar (editar) um Post
-  public async update({ auth, params, view }: HttpContextContract) {
-    await auth.use('web').authenticate()
+  public async update({ params, view }: HttpContextContract) {
     const post = await Post.findOrFail(params.id)
     return view.render('posts/update', { post: post })
   }
