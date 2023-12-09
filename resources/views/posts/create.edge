@@ -5,7 +5,7 @@
   @!form.title({ title: 'Crie o seu Post'})
 
 
-  <form action="{{ route('posts.store') }}" method="POST">
+  <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
 
     <div class="flex flex-col mb-1 text-sm justify-between" >
       @!form.label({ name: 'Título'})
@@ -81,9 +81,14 @@
     <div class="flex flex-col mb-8 text-sm justify-between" >
       @!form.label({ name: 'Crítica'})
       <textarea class name="content" rows="5" cols="33">
- Minha crítica sobre esse filme começa com...
+      Minha crítica sobre esse filme começa com...
       </textarea>
 
+    </div>
+
+    <div class="flex flex-col mb-8 text-sm justify-between" >
+      @!form.label({ name: 'Cover'})
+      @!form.input({ name: 'cover', type: 'file' })
     </div>
 
     <div>
