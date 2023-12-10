@@ -22,7 +22,7 @@
   }
 </script>
 
-<div class="w-full h-full bg-orange-300">
+<div class="w-full h-max bg-orange-300">
 
  @each(post in posts)
   <div class="w-50 bg-orange-200 m-5 p-5 rounded-lg">
@@ -94,7 +94,7 @@
       <a href="{{ route('posts.update', { id: post.id }) }}">
         @!icons.edit()
       </a>
-      <a href="{{ route('posts.delete', { id: post.id }) }}">
+      <a href="{{ route('posts.destroy', { id: post.id }) }}">
         @!icons.delete()
       </a>
 

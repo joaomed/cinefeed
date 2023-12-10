@@ -38,8 +38,10 @@ export default class UsersController {
   // Detalhar um usuário
   public async show({ params, view }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
+    const country = await Country.findOrFail(user.countryId)
+    const countries = await Country.all()
 
-    return view.render('users/show', { user: user })
+    return view.render('users/show', { user: user, country: country, countries: countries })
   }
 
   // Página de atualizar (editar) um usuário

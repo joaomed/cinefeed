@@ -1,12 +1,61 @@
 @layout('layouts/mainUser')
 
 @section('content')
-  <div>
-    <label>
-      Email:
-    </label>
-    <span>
-      {{ user.email }}
-    </span>
-  </div>
+  <div class=" flex flex-col items-center justify-center h-screen w-full bg-white">
+
+  <div class="flex flex-col m-auto items-center w-90 text-orange-800 p-10 rounded bg-orange-200">
+    <div class="flex items-center gap-3 mb-5">
+      <span class="flex w-10 h-10 text-white bg-orange-900 rounded-full justify-center items-center">{{ user.name.substring(0,1) }}
+      </span>
+      <span class="font-bold">
+      {{user.name}} {{user.lastName}}
+      </span>
+      <span >
+      ({{country.sigla}})
+      </span>
+    </div>
+
+
+  <form action="{{ route('users.patch', { id: user.id }, { qs: { _method: 'PATCH' }}) }}" method="POST">
+
+    <div class="flex gap-2">
+      <div class="flex flex-col mb-4 text-sm" >
+        @!form.label({ name: 'Nome'})
+        @!form.input({ name: 'name', type: 'text', value: user.name })
+      </div>
+
+      <div class="flex flex-col mb-4 text-sm justify-between" >
+        @!form.label({ name: 'Sobrenome'})
+        @!form.input({ name: 'lastName', type: 'text', value: user.lastName })
+      </div>
+    </div>
+
+    <div class="flex flex-col mb-4 text-sm justify-between" >
+      @!form.label({ name: 'Email'})
+      @!form.input({ name: 'email', type: 'email', value: user.email })
+    </div>
+
+    <div class="flex flex-col mb-4 text-sm justify-between" >
+      @!form.label({ name: 'Email'})
+      @!form.input({ name: 'password', type: 'password', placeholder: 'Senha' })
+    </div>
+
+    <div class="flex flex-col mb-8 text-sm justify-between" >
+      @!form.label({ name: 'Qual seu país?'})
+      <select  name="countryId" required>
+        <option  value={{country.id}}>{{country.nome_pais}}</option>
+          @each(country in countries)
+        <option value={{country.id}}>{{ country.nome_pais}}</option>
+        @end
+      </select>
+    </div>
+
+    <button type="submit" class=" w-full border transition p-2 rounded-md bg-orange-800 border-orange-700 text-orange-200 hover:bg-orange-900 active:bg-orange-950">
+     Editar Usuário
+    </button>
+  </form>
+</div>
+
+
 @end
+

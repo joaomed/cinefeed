@@ -6,7 +6,7 @@
   "
   type="{{ type }}"
   name="{{ name }}"
-  value="{{ flashMessages.get(name) ? flashMessages.get(name) : '' }}"
+  value="{{ value ? value : (flashMessages.get(name) ? flashMessages.get(name) : '' )}}"
   placeholder="{{placeholder}}"
 />
 @if(flashMessages.has(`errors.${name}`))

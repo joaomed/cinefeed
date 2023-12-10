@@ -53,8 +53,8 @@ Route.group(() => {
   Route.group(() => {
     Route.group(() => {
       Route.get('/', 'UsersController.index').as('index') // listar todos usuários
-      Route.patch('/:id', 'UsersController.patch').as('patch') // editar usuário
       Route.get('/:id/update', 'UsersController.update').as('update') // listar página de editar usuário
+      Route.post('/:id', 'UsersController.patch').as('patch') // editar usuário
     }).middleware('auth')
 
     Route.get('/new', 'UsersController.create').as('create') // listar página de cadastro de usuário
@@ -77,7 +77,7 @@ Route.group(() => {
 
       Route.patch('/:id', 'PostsController.patch').as('patch') // editar post
 
-      Route.delete('/:id', 'PostsController.delete').as('delete') // deletar post
+      Route.delete('/:id', 'PostsController.destroy').as('destroy') // deletar post
     }).middleware('auth')
 
     Route.get('/:id/update', 'PostsController.update').as('update') // listar página de editar post
