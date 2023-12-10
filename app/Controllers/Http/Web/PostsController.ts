@@ -21,18 +21,20 @@ export default class PostsController {
   }
 
   // Salvar um post
-  public async store({ request, response }: HttpContextContract) {
+  public async store({ auth, request, response }: HttpContextContract) {
     const payload = await request.validate(CreatePostValidator)
 
     console.log(payload.cover)
 
     //TODO: Pegar o usuario logado
-    const user = await User.findOrFail(1)
+    const user = auth.user
 
-    const postService = new PostService()
-    const post = await postService.create(user, payload)
+    if (user) {
+      const postService = new PostService()
+      const post = await postService.create(user, payload)
 
-    return response.redirect().toRoute('posts.show', { id: post.id })
+      return response.redirect().toRoute('posts.show', { id: post.id })
+    }
   }
 
   // Detalhar um post

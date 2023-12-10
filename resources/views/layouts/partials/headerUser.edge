@@ -16,6 +16,11 @@
       @form.button({ href: route('users.index') })
         Listar Usuários
       @end
+      @if(auth.user)
+      @form.button({ href: route('sessions.login') })
+         {{ auth.user.email }}
+      @end
+      @endif
     </nav>
   </div>
 </header>
