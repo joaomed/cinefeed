@@ -1,7 +1,7 @@
 @layout('layouts/mainUser')
 
 @section('content')
-<div class="flex flex-col m-auto items-center w-90 text-orange-800 p-10 rounded bg-orange-200 mb-20">
+<div class="flex flex-col m-auto items-center w-90 h-screen text-orange-800 p-10 rounded bg-orange-200 mb-20">
   @!form.title({ title: 'Crie o seu Post'})
 
 
@@ -87,7 +87,7 @@
     </div>
 
     <div class="flex flex-col mb-8 text-sm justify-between" >
-      @!form.label({ name: 'Cover'})
+      @!form.label({ name: 'Cartaz'})
       @!form.input({ name: 'cover', type: 'file' })
     </div>
 

@@ -90,4 +90,20 @@ export default class PostsController {
 
     return { id: post.id, liked: liked }
   }
+
+  // Listar favoritos
+  public async favorites({ view, auth }: HttpContextContract) {
+    const user = auth.user
+    const posts = await Post.query().preload('user').exec()
+    const favorites = [] as Post[]
+
+    if (user) {
+      for (let post of posts) {
+        const liked = await post.liked(user)
+        if (liked) favorites.push(post)
+      }
+    }
+
+    return view.render('posts/favorites', { favorites: favorites })
+  }
 }

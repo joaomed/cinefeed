@@ -1,25 +1,30 @@
-@layout('layouts/main')
+@layout('layouts/mainUser')
 
 @section('content')
 
 <script>
-  window.document.onload = function(e) {
+
+ window.document.onload = function(e) {
   }
 
-  async function likebutton(url) {
-    const button = document.getElementById('like')
+  async function likebutton(url, postId) {
+    const like = document.getElementById(`like-${postId}`)
     const response = await fetch(url)
 
     const data = await response.json()
 
-    if(data.liked) {
-      button.classList.replace('text-black', 'text-red-400')
+    if (data.liked) {
+      like.style.fill = 'red';
     } else {
-      button.classList.replace('text-red-400', 'text-black')
+      like.style.fill = 'none';
+
     }
   }
 </script>
 
+<div class="w-full h-max bg-orange-300">
+
+ @each(post in favorites)
   <div class="w-50 bg-orange-200 m-5 p-5 rounded-lg">
     <div class="mb-5">
       <div class="mb-10">Post {{post.id}}</div>
@@ -82,30 +87,8 @@
       <img class="border-solid border-2 border-orange-300" src="{{ route('files.show', { id: post.coverId }) }}" alt="image-movie" width="200" height="400">
     </div>
 
-    <div class="flex items-center gap-3" >
-      <a href="{{ route('posts.show', { id: post.id }) }}">
-        @!icons.show()
-      </a>
-      <a href="{{ route('posts.update', { id: post.id }) }}">
-        @!icons.edit()
-      </a>
-      <a href="{{ route('posts.destroy', { id: post.id }) }}" type="submit">
-        @!icons.delete()
-      </a>
-
-      <button id="button" class="w-6 h-6"
-      onclick="likebutton('{{ route('posts.like', { id: post.id })}}', {{post.id}})">
-        <svg id="like-{{post.id}}" aria-hidden="true" fill="{{ await post.liked(user) ? 'red' : 'white' }}" stroke="black" stroke-width="1.5" viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg">
-          <path
-          d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-          stroke-linecap="round" stroke-linejoin="round"></path>
-        </svg>
-
-      </button>
-
-    </div>
   </div>
 
-
+  @end
+</div>
 @end

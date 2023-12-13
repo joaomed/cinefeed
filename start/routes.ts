@@ -73,6 +73,8 @@ Route.group(() => {
 
       Route.get('/new', 'PostsController.create').as('create') // listar página de criar post
 
+      Route.get('/favorites', 'PostsController.favorites').as('favorites') // listar favoritos
+
       Route.post('/', 'PostsController.store').as('store') // criar post
 
       Route.patch('/:id', 'PostsController.patch').as('patch') // editar post

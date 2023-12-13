@@ -4,6 +4,9 @@
       <a class="text-orange-300" href="{{ route('posts.index') }}">cinefeed</a>
     </div>
     <nav class="flex flex-row gap-2 text-orange-300">
+      @form.button({ href: route('posts.favorites') })
+          Favoritos
+      @end
       @form.button({ href: route('sessions.logout') })
           Encerrar a sessão
       @end
